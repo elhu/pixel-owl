@@ -1,0 +1,4 @@
+tumblr.yml
+*.jpg
+.DS_Store
+.byebug_history

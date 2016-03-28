@@ -23,14 +23,13 @@ class OwlAPI
 
   private
   def photos
+    return @photos if @photos&.any?
     # If we're out of photos, fetch more
-    if !@photos&.any?
-      @photos = client.posts(blog, type: "photo")['posts'].flat_map do |post|
-        post['photos'].flat_map do |photo|
-          photo.dig('original_size', 'url')
-        end
-      end.shuffle
-    end
+    @photos = client.posts(blog, type: "photo")['posts'].flat_map do |post|
+      post['photos'].flat_map do |photo|
+        photo.dig('original_size', 'url')
+      end
+    end.shuffle
   end
 
   def blog
